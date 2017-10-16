@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+
+        }
+        .ball1{
+            background-color: red;
+        }
+        .ball2{
+            background-color: blue;
+        }
+        .ball3{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="ball ball1" style="margin-left: 0"></div>
+        <div class="ball ball2" style="margin-left: 0"></div>
+        <div class="ball ball3" style="margin-left: 0"></div>
+    </div>
+    <script>
+        var ball1 = document.querySelector('.ball1');
+        var ball2 = document.querySelector('.ball2');
+        var ball3 = document.querySelector('.ball3');
+
+     function promiseAnime(ball, distence){
+        console.log('promise');
+        return new Promise((resolve, reject)=>{
+            var margin_left = parseInt(ball.style.marginLeft);
+            var time = setInterval(()=>{
+               if(margin_left==distence){
+                clearInterval(time);
+                resolve();
+               } else if(margin_left>distence){
+                   margin_left--;
+               } else {
+                   margin_left++;
+               }
+               ball.style.marginLeft = margin_left+'px';
+           },13)
+
+       })
+     }
+     promiseAnime(ball1, 100)
+     .then(()=>promiseAnime(ball2,200))
+     .then(()=>promiseAnime(ball3,300))
+     .then(()=>promiseAnime(ball3,100))
+     .then(()=>promiseAnime(ball2,100));
+
+
+    </script>
+</body>
+</html>
